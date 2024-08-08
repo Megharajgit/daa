@@ -1,0 +1,35 @@
+knapsack(7) Implement 0/1 Knapsack problem using Dynamic Programming.
+
+#include<stdio.h>
+#include<conio.h>
+int p[10],w[10],n;
+int g(int i,int m)
+{
+	if((i==n)&&(w[i]<=m))
+	return p[i];
+	if((i==n)&&(w[i]>m))
+	return 0;
+	if(w[i]>m)
+	return g(i+1,m);
+	return max(g(i+1,m),g(i+1,m-w[i])+p[i]);
+}
+int max(int a,int b)
+{
+	return(a>b)?a:b;
+}
+void main()
+{
+	int i,m,profit;
+	printf("Enter number of objects\n");
+	scanf("%d",&n);
+	printf("Enter weight & profit\n");
+	for(i=1;i<=n;i++)
+	{
+		scanf("%d%d",&w[i],&p[i]);
+	}
+	printf("Enter Knapsack capacity\n");
+	scanf("%d",&m);
+	profit=g(1,m);
+	printf("Maximum profit earned = %d\n",profit);
+	getch();
+}
