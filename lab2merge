@@ -1,0 +1,55 @@
+#include <stdio.h>
+#include <conio.h>
+int a[],low,high,n;
+void mergesort(int a[],int low,int high){
+	int mid;
+	if(low<high){
+		mid=(low+high)/2;
+		mergesort(a,low,mid);
+		mergesort(a,mid+1,high);
+		simple_merge(a,low,mid,high);
+		return;
+	}
+}
+void simple_merge(int a[],int low,int mid,int high){
+	int i,j,k;
+	int c[high-low+1];
+	i=low;
+	j=mid+1;
+	k=0;
+	while(i<=mid && j<=high){
+		if(a[i]<=a[j]){
+			c[k++]=a[i++];
+		}
+		else
+			c[k++]=a[j++];
+	}
+	while(i<=mid)
+		c[k++]=a[i++];
+	while(j<=high)
+		c[k++]=a[j++];
+	for(i=low,k=0;i<=high;i++,k++){
+		a[i]=c[k];
+	}
+	return;
+}
+int main(){
+	int i,n;
+	printf("Enter the size of the array:");
+	scanf("%d",&n);
+	a[n];
+	printf("\nEnter %d elements into the array:\n",n);
+	for(i=0;i<n;i++){
+		scanf("%d",&a[i]);
+	}
+	printf("\nArray element before sorting:\n");
+	for(i=0;i<n;i++){
+		printf("%d",a[i]);
+	}
+	mergesort(a,0,n-1);
+	printf("\nArray element after sorting:");
+	for(i=0;i<n;i++){
+		printf("%d\t",a[i]);
+	}        
+	return 0;
+}
