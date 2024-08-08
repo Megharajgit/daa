@@ -1,0 +1,71 @@
+//quicksort
+
+#include <stdio.h>
+void swap(int *a, int *b) 
+{
+	int temp = *a;
+	*a = *b;
+	*b = temp;
+}
+int partition(int a[], int start, int end) 
+{
+	int key = a[start];
+	int i = start;
+	int j = end;
+	while (i <= j) 
+	{
+		while (a[i] <= key) 
+		{
+			i++;
+		}
+		while (a[j] > key) 
+		{
+			j--;
+		}
+		if (i < j) 
+		{
+			swap(&a[i], &a[j]);
+		}
+	}
+	swap(&a[start], &a[j]);
+	return j;
+}
+void quicksort(int a[], int s, int e) 
+{
+	if (s < e) 
+	{
+		int loc = partition(a, s, e);
+		quicksort(a, s, loc - 1);
+		quicksort(a, loc + 1, e);
+	}
+}
+int main() {
+	int a[20],n,i;
+	printf("\nEnter the size of array:");
+	scanf("%d",&n);
+	printf("\nEnter %d array elements:",n);
+	for(i=0; i<n; i++) 
+	{
+		scanf("%d",&a[i]);
+	}
+	printf("\nElements before sorting:\t");
+	for (i = 0; i < n; i++) 
+	{
+		printf("%d\t ", a[i]);
+	}
+	quicksort(a, 0, n - 1);
+	printf("\nElements after sorting:\t");
+	for (i = 0;i< n; i++) 
+	{
+		printf("%d\t",a[i]);
+	}
+}
+
+//OUTPUT : 
+//Enter the size of array:
+//5
+//
+//Enter 5 array elements:5 4 3 2 1
+//
+//Elements before sorting  5       4       3       2       1
+//Elements after sorting:  1       2       3       4       5
