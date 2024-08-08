@@ -1,0 +1,63 @@
+//Floyds(6) Suppose in a network of cities, you are interested in finding shortest paths between all 
+//cities. Design a ‘C’ program to implement this using Floyd’s algorithm. 
+
+#include<stdio.h> 
+int n,c[10][10],i,j,k,d[10][10]; 
+void read_data(); 
+void write_data(); 
+void floyd(); 
+void main() 
+{
+	printf("enter no.of nodes\n"); 
+	scanf("%d",&n); 
+	printf("enter the cost adjacency matrix\n"); 
+	read_data(); 
+	floyd(c,n); 
+	write_data(); 
+} 
+void read_data() 
+{ 
+	for(i=1;i<=n;i++)
+	{ 
+		for(j=1;j<=n;j++)
+		{
+			scanf("%d",&c[i][j]);
+		}
+	}
+} 
+void floyd(int c[10][10],int n) 
+{ 
+	int min(int,int); 
+	for(i=1;i<=n;i++) 
+	{ 
+		for(j=1;j<=n;j++) 
+		{ 
+			d[i][j]=c[i][j]; 
+		}
+	}
+	for(k=1;k<=n;k++) 
+	{ 
+		for(i=1;i<=n;i++) 
+		{ 
+			for(j=1;j<=n;j++)
+			{
+				d[i][j]=min(d[i][j],d[i][k]+d[k][j]); 
+			}
+		}
+	}
+}
+void write_data() 
+{ 
+	printf("the distance matrix is shown below\n"); for(i=1;i<=n;i++) 
+	{ 
+		for(j=1;j<=n;j++) 
+		{ 
+			printf("%d\t",d[i][j]); 
+		} 
+		printf("\n"); 
+		}
+	}
+	int min(int a,int b) 
+	{ 
+	return a<b?a:b;
+}
